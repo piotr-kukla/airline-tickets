@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "bootzooka.fullname" . }}-config
+data:
+  JAVA_OPTS: "{{ .Values.bootzooka.java_opts }}"
+  SMTP_ENABLED: "{{ .Values.bootzooka.smtp.enabled }}"
+  SMTP_HOST: "{{ .Values.bootzooka.smtp.host }}"
+  SMTP_PORT: "{{ .Values.bootzooka.smtp.port }}"
+  SMTP_USERNAME: "{{ .Values.bootzooka.smtp.username }}"
+  SMTP_SSL_CONNECTION: "{{ .Values.bootzooka.smtp.ssl }}"
+  SMTP_VERIFY_SSL_CERTIFICATE: "{{ .Values.bootzooka.smtp.ssl_ver }}"
+  SMTP_FROM: "{{ .Values.bootzooka.smtp.from }}"
+  PASSWORD_RESET_LINK_PATTERN: "{{ .Values.bootzooka.reset_password_url }}"
+  SQL_USERNAME: "{{ tpl .Values.bootzooka.sql.username . }}"
+  SQL_DBNAME: "{{ tpl .Values.bootzooka.sql.name . }}"
+  SQL_HOST: "{{ tpl .Values.bootzooka.sql.host . }}"
+  SQL_PORT: "{{ tpl .Values.bootzooka.sql.port . }}"
+  OTEL_SDK_DISABLED: "{{ not .Values.bootzooka.otel.enabled }}"
+  OTEL_EXPORTER_OTLP_ENDPOINT: "{{ .Values.bootzooka.otel.endpoint }}"
+  OTEL_EXPORTER_OTLP_PROTOCOL: "{{ .Values.bootzooka.otel.protocol }}"
+  OTEL_SERVICE_NAME: "{{ .Values.bootzooka.otel.service_name }}"
+  OTEL_METRIC_EXPORT_INTERVAL: "{{ .Values.bootzooka.otel.metric_export_interval }}"
+  LOGBACK_JSON_ENCODE: "{{ .Values.bootzooka.logback_json_encode }}"
