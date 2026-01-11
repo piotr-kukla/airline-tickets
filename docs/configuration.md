@@ -19,7 +19,7 @@ You can also add support for another email service by implementing the `EmailSen
 
 ## Project name customization
 
-If you want to use Bootzooka as a scaffolding for your own project, use the `renameProject` command with sbt, for
+If you want to use Airline as a scaffolding for your own project, use the `renameProject` command with sbt, for
 example:  
 
 ````

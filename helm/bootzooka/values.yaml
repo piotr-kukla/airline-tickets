@@ -1,16 +1,16 @@
-# Default values for Bootzooka.
+# Default values for Airline.
 
 postgresql:
-  # -- Disable if you already have PostgreSQL running in cluster where Bootzooka chart is being deployed
+  # -- Disable if you already have PostgreSQL running in cluster where Airline chart is being deployed
   enabled: true
-  fullnameOverride: "bootzooka-pgsql-postgresql"
+  fullnameOverride: "airline-pgsql-postgresql"
   auth:
     # -- Username for PostgreSQL user
     username: "postgres"
     # -- Password for PostgreSQL user
-    password: "bootzooka"  # Change this
-    # -- Database name for Bootzooka
-    database: "bootzooka"
+    password: "airline"  # Change this
+    # -- Database name for Airline
+    database: "airline"
   service:
     port: 5432
   connectionTest:
@@ -19,11 +19,11 @@ postgresql:
       tag: 11
       pullPolicy: IfNotPresent
 
-bootzooka:
+airline:
   replicaCount: 1
   liveness_initial_delay: 60
   readiness_initial_delay: 60
-  reset_password_url: "https://bootzooka.example.com/password-reset?code=%s"
+  reset_password_url: "https://airline.example.com/password-reset?code=%s"
   sql:
     # -- Value will be taken from 'postgresql.fullnameOverride' setting
     host: '{{ .Values.postgresql.fullnameOverride }}'
@@ -42,18 +42,18 @@ bootzooka:
     ssl: "true"
     ssl_ver: "false"
     username: "server.example.com"
-    from: "hello@bootzooka.example.com"
-    password: "bootzooka"
+    from: "hello@airline.example.com"
+    password: "airline"
 
   otel:
     enabled: false
     endpoint: ""
     protocol: ""
-    service_name: "bootzooka"
+    service_name: "airline"
     metric_export_interval: "60s"
 
   image:
-    repository: softwaremill/bootzooka
+    repository: softwaremill/airline
     tag: latest
     pullPolicy: Always
 
@@ -75,14 +75,14 @@ bootzooka:
       kubernetes.io/tls-acme: "true"
     hosts:
       - host:
-          domain: bootzooka.example.com
+          domain: airline.example.com
           path: /
           pathType: ImplementationSpecific
           port: http
     tls:
-      - secretName: bootzooka-tls
+      - secretName: airline-tls
         hosts:
-        - bootzooka.example.com
+        - airline.example.com
 
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious

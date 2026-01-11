@@ -3,8 +3,8 @@ layout: default
 title: "Frontend application"
 ---
 
-Bootzooka's frontend is a true Single Page Application built with React. It can be treated as a completely separate
-application or as a client for Bootzooka server.
+Airline's frontend is a true Single Page Application built with React. It can be treated as a completely separate
+application or as a client for Airline server.
 
 As a separate application it deserves its own build process handling all the details (linting, testing, minifying etc).
 Hence the frontend part is almost completely decoupled from server side code. The only coupling is on the level of
@@ -19,7 +19,7 @@ it. For more details, see the project's [page](https://github.com/vitejs/vite).
 To work with the `ui` module you need to have `node.js` installed in version 22 or newer. Make sure you have `node`
 command available on `PATH`.
 
-As a package manager, Bootzooka's UI uses [Yarn](https://yarnpkg.com). Make sure to have it installed before the first
+As a package manager, Airline's UI uses [Yarn](https://yarnpkg.com). Make sure to have it installed before the first
 run.
 
 ## First run
@@ -32,7 +32,7 @@ yarn install
 
 This will install all required dependencies for this project. If all is well you can start your development version of
 frontend by issuing `yarn start` from command line (or running the provided `frontend-start` script in the main
-directory). It should start your browser and point you to [Bootzooka home page](http://0.0.0.0:8081/#/).
+directory). It should start your browser and point you to [Airline home page](http://0.0.0.0:8081/#/).
 
 ## Development
 
@@ -47,7 +47,7 @@ The most important tasks exposed are:
 
 ## `yarn start` task
 
-This task serves Bootzooka application on port `8081` on `0.0.0.0` (it is available to all hosts from the same network).
+This task serves Airline application on port `8081` on `0.0.0.0` (it is available to all hosts from the same network).
 Your default browser should open at this location. All requests to the backend will be proxied to port `8080` where it
 expects the server to be run.
 

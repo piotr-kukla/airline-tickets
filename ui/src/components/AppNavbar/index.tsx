@@ -28,7 +28,7 @@ const COMMON_NAVBAR_ITEMS: NavbarMenuItem[] = [
   {
     id: 'fork',
     label: 'Fork',
-    href: 'https://github.com/softwaremill/bootzooka',
+    href: 'https://github.com/softwaremill/airline',
     icon: GitFork,
   },
 ];

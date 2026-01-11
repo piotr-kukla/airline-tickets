@@ -5,13 +5,13 @@ export const Welcome: FC = () => (
   <div className="w-full h-full flex flex-col justify-center items-center">
     <div className="w-full h-[50%] flex flex-col items-center justify-center bg-foreground text-background text-center p-4 lg:p-0">
       <h3 className="text-xl mb-2">Hi there!</h3>
-      <h1 className="text-3xl mb-3">Welcome to Bootzooka!</h1>
+      <h1 className="text-3xl mb-3">Welcome to Airline!</h1>
       <p className="text-center">
-        If you are interested in how Bootzooka works,
+        If you are interested in how Airline works,
         <br />
         you can browse the{' '}
         <a
-          href="http://softwaremill.github.io/bootzooka/"
+          href="http://softwaremill.github.io/airline/"
           target="blank"
           rel="noopener noreferrer"
           className="underline"
@@ -20,7 +20,7 @@ export const Welcome: FC = () => (
         </a>{' '}
         or the{' '}
         <a
-          href="https://github.com/softwaremill/bootzooka"
+          href="https://github.com/softwaremill/airline"
           target="blank"
           rel="noopener noreferrer"
           className="underline"

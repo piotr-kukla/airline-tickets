@@ -5,7 +5,7 @@ title: "Getting started"
 
 ## Prerequisites
 
-In order to build and develop a Bootzooka-derived application you'll need the following:
+In order to build and develop a Airline-derived application you'll need the following:
 
 - Java JDK >= 21
 - [sbt](http://www.scala-sbt.org/) >= 1.10
@@ -14,7 +14,7 @@ In order to build and develop a Bootzooka-derived application you'll need the fo
 
 ## How to run
 
-Because (as said before) Bootzooka consists of two separate applications, in development you need to run both
+Because (as said before) Airline consists of two separate applications, in development you need to run both
 separately. This way the server-side code can be reloaded independently of the frontend code: if, for example, you make
 a small change to an HTML file, thanks to live-reload you'll see the changes immediately, rebuilding and reloading only
 the frontend part, while the server is running undisturbed.
@@ -24,8 +24,8 @@ server parts.**
 
 ### Database
 
-Bootzooka uses [PostgreSQL](https://www.postgresql.org) to store data, so you will need the database running to use the
-application. By default, Bootzooka uses the `bootzooka` database using the `postgres` user, connecting to a server
+Airline uses [PostgreSQL](https://www.postgresql.org) to store data, so you will need the database running to use the
+application. By default, Airline uses the `airline` database using the `postgres` user, connecting to a server
 running on `localhost:5432`. This can be customised in the `application.conf` file.
 
 You can either use a stand-alone database, a docker image, or any other PostgreSQL instance.

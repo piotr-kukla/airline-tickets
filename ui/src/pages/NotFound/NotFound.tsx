@@ -35,12 +35,12 @@ export const NotFound: React.FC = () => (
         </Button>
         <Button asChild variant="outline">
           <Link
-            to="https://github.com/softwaremill/bootzooka/"
+            to="https://github.com/softwaremill/airline/"
             rel="noopener noreferrer"
             target="_blank"
           >
             <BsGithub className="w-6 h-6" />
-            Bootzooka on GitHub
+            Airline on GitHub
           </Link>
         </Button>
       </CardContent>

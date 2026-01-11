@@ -10,13 +10,13 @@ Generally during development you'll need two processes:
 
 ## Cloning
 
-If you are planning to use Bootzooka as scaffolding for your own project, consider cloning the repo with `git clone
+If you are planning to use Airline as scaffolding for your own project, consider cloning the repo with `git clone
 --depth 1` in order to start the history with last commit. You can now switch to your origin repository of choice with:
 `git remote set-url origin https://repo.com/OTHERREPOSITORY.git`
 
 ## Useful sbt commands
 
-* `renameProject` - replace Bootzooka with your custom name and adjust scala package names
+* `renameProject` - replace Airline with your custom name and adjust scala package names
 * `compile` - compile the whole project
 * `test` - run all the tests
 * `project <sub-project-name>` - switch context to the given sub-project, then all the commands will be executed only
@@ -26,7 +26,7 @@ for that sub-project, this can be also achieved with e.g.: `<sub-project-name>/t
 
 ## Database schema evolution
 
-With Flyway, all you need to do is to put DDL script within bootzooka-backend/src/main/resources/db/migration/
+With Flyway, all you need to do is to put DDL script within airline-backend/src/main/resources/db/migration/
 directory. You have to obey the following [naming convention](http://flywaydb.org/documentation/migration/sql.html):
 `V#__your_arbitrary_description.sql` where `#` stands for *unique* version of your schema.
 
@@ -44,7 +44,7 @@ There are two imports that are useful when developing a new functionality:
 If you are defining database queries or running transactions, add the following imports:
 
 ```scala
-import com.softwaremill.bootzooka.infrastructure.Magnum.given
+import pl.algocode.airline.infrastructure.Magnum.given
 import com.augustnagro.magnum.{sql, DbTx}
 ```
 
@@ -56,12 +56,12 @@ as well as the given instance which is required by methods that should run in a 
 If you are defining new endpoints, import the base endpoints from `Http`, as well as Tapir:
 
 ```scala
-import com.softwaremill.bootzooka.http.Http.*
+import pl.algocode.airline.http.Http.*
 import sttp.tapir.*
 import sttp.tapir.json.jsoniter.*
 ```
 
-This will bring into scope Tapir builder methods and schemas for documentation, along with Bootzooka-specific
+This will bring into scope Tapir builder methods and schemas for documentation, along with Airline-specific
 customizations.
 
 ### Logging

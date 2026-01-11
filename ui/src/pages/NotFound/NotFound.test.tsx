@@ -8,5 +8,5 @@ test('<NotFound /> should render', () => {
   expect(screen.getByText("You shouldn't be here for sure 😅")).toBeVisible();
   expect(screen.getByText('Home page')).toBeVisible();
   expect(screen.getByText('SoftwareMill - our company website')).toBeVisible();
-  expect(screen.getByText('Bootzooka on GitHub')).toBeVisible();
+  expect(screen.getByText('Airline on GitHub')).toBeVisible();
 });

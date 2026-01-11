@@ -14,7 +14,7 @@
   <appender name="OpenTelemetry"
     class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender"></appender>
 
-  <logger name="com.softwaremill.bootzooka" level="${LOG_LEVEL:-DEBUG}" additivity="false">
+  <logger name="pl.algocode.airline" level="${LOG_LEVEL:-DEBUG}" additivity="false">
     <appender-ref ref="STDOUT" />
     <appender-ref ref="OpenTelemetry" />
   </logger>

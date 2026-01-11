@@ -11,7 +11,7 @@ You can test the image by using the provided `docker-compose.yml` file.
 
 ## Kubernetes
 
-Use [Helm](https://helm.sh/) to easily deploy Bootzooka into [Kubernetes](https://kubernetes.io/) cluster.
+Use [Helm](https://helm.sh/) to easily deploy Airline into [Kubernetes](https://kubernetes.io/) cluster.
 
 ### Add SoftwareMill Helm repository
 
@@ -20,18 +20,18 @@ helm repo add softwaremill https://charts.softwaremill.com/
 helm repo update
 ```
 
-### Fetch and Customize Bootzooka chart
+### Fetch and Customize Airline chart
 
 ```
-helm fetch softwaremill/bootzooka --untar
+helm fetch softwaremill/airline --untar
 ```
 
-### Install Bootzooka chart
+### Install Airline chart
 
 ```
-helm install --generate-name bootzooka
+helm install --generate-name airline
 ```
 
-Please see [Bootzooka Helm Chart
-documentation](https://github.com/softwaremill/bootzooka/blob/master/helm/bootzooka/README.md) for more information,
+Please see [Airline Helm Chart
+documentation](https://github.com/softwaremill/airline/blob/master/helm/airline/README.md) for more information,
 including configuration options.

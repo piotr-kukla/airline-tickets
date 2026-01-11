@@ -17,7 +17,7 @@ test('<App /> shoud show the app for anonymous users', async () => {
     </UserContext.Provider>
   );
 
-  expect(await screen.findByText('Welcome to Bootzooka!')).toBeVisible();
+  expect(await screen.findByText('Welcome to Airline!')).toBeVisible();
 });
 
 test('<App /> shoud show the app for logged-in users', async () => {
@@ -38,5 +38,5 @@ test('<App /> shoud show the app for logged-in users', async () => {
     </UserContext.Provider>
   );
 
-  expect(await screen.findByText('Welcome to Bootzooka!')).toBeVisible();
+  expect(await screen.findByText('Welcome to Airline!')).toBeVisible();
 });

@@ -39,7 +39,7 @@ test('<AppNavbar /> shoud render the brand name', () => {
   );
 
   screen
-    .getAllByText('Bootzooka')
+    .getAllByText('Airline')
     .forEach((el) => expect(el).toBeInTheDocument());
 });
 

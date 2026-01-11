@@ -11,7 +11,7 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
-test('<AppFooter />should render Bootzooka version info', async () => {
+test('<AppFooter />should render Airline version info', async () => {
   (useGetAdminVersion as unknown as ReturnType<typeof vi.fn>).mockReturnValue({
     isPending: false,
     isLoading: false,

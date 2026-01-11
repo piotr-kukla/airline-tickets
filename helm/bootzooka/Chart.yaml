@@ -1,7 +1,7 @@
 apiVersion: v2
 appVersion: "1.0"
-description: "A Helm chart for Bootzooka"
-name: bootzooka
+description: "A Helm chart for Airline"
+name: airline
 version: 0.3.0
 type: application
 keywords:
@@ -10,15 +10,15 @@ keywords:
  - postgresql
  - angular
  - bootstrap
-home: https://softwaremill.github.io/bootzooka/
+home: https://softwaremill.github.io/airline/
 sources:
- - https://github.com/softwaremill/bootzooka
+ - https://github.com/softwaremill/airline
 maintainers:
  - name: tomusheq
    url: https://github.com/tomusheq
  - name: ideas-into-software
    url: https://github.com/ideas-into-software
-icon: https://raw.githubusercontent.com/softwaremill/bootzooka/master/banner.png
+icon: https://raw.githubusercontent.com/softwaremill/airline/master/banner.png
 dependencies:
  - name: postgresql
    version: ^16
@@ -27,10 +27,10 @@ dependencies:
 annotations:
  artifacthub.io/links: |
   - name: Docs
-    url: https://softwaremill.github.io/bootzooka/
+    url: https://softwaremill.github.io/airline/
   - name: Source
-    url: https://github.com/softwaremill/bootzooka
+    url: https://github.com/softwaremill/airline
   - name: Demo
-    url: https://bootzooka.softwaremill.com/
+    url: https://airline.softwaremill.com/
   - name: Home
     url: https://softwaremill.com/

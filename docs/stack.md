@@ -3,13 +3,13 @@ layout: default
 title: "Technology stack"
 ---
 
-When picking Bootzooka's technology stack we wanted to use modern, but reasonably proven technologies. So while you
+When picking Airline's technology stack we wanted to use modern, but reasonably proven technologies. So while you
 won't find the latest, hottest frameworks here, you also won't see any JSPs or &lt;marquee&gt; tags. The components are
 easy to replace, so if you'd like to experiment with a new library, this should be a matter of replacing only a small
-part of Bootzooka. Also, we try to update the stack once in a while, so that it's up-to-date with current developments
+part of Airline. Also, we try to update the stack once in a while, so that it's up-to-date with current developments
 and trends.
 
-Bootzooka's stack consists of the following technologies/tools, on the backend:
+Airline's stack consists of the following technologies/tools, on the backend:
 
 - [Scala](https://www.scala-lang.org) (JVM based, functional language)
 - [Tapir](https://github.com/softwaremill/tapir) (endpoint description library) + [netty](https://netty.io) (backend

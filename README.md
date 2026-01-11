@@ -1,32 +1,32 @@
-![Bootzooka](https://github.com/softwaremill/bootzooka/raw/master/banner.png)
+![Airline](https://github.com/softwaremill/airline/raw/master/banner.png)
 
-[![CI](https://github.com/softwaremill/bootzooka/workflows/Bootzooka%20CI/badge.svg)](https://github.com/softwaremill/bootzooka/actions?query=workflow%3A%22Bootzooka+CI%22)
+[![CI](https://github.com/softwaremill/airline/workflows/Airline%20CI/badge.svg)](https://github.com/softwaremill/airline/actions?query=workflow%3A%22Airline+CI%22)
 
-Bootzooka is a scaffolding project to allow quick start of development of a microservice or a web application. If you'd
+Airline is a scaffolding project to allow quick start of development of a microservice or a web application. If you'd
 like to have a jump start developing a Scala-based project, skipping the boring parts and focusing on the real business
 value, this template might be for you!
 
-You can start testing or developing Bootzooka right away with the below setup, or proceed to the mor ecomplete
-[Bootzooka documentation](http://softwaremill.github.io/bootzooka/).
+You can start testing or developing Airline right away with the below setup, or proceed to the mor ecomplete
+[Airline documentation](http://softwaremill.github.io/airline/).
 
 # Run locally using Docker
 
 If you'd like to see the project in action, the fastest way is to use the provided Docker compose setup. It starts three
-images: Bootzooka itself (either locally built or downloaded), PostgreSQL server and Graphana LGTM for observability.
+images: Airline itself (either locally built or downloaded), PostgreSQL server and Graphana LGTM for observability.
 
 # Run locally for development
 
-If you'd like to modify some of Bootzooka's parts, or develop your own application using the template, you'll need to
+If you'd like to modify some of Airline's parts, or develop your own application using the template, you'll need to
 start the backend & frontend in development modes separately.
 
 ## Database
 
-First, you'll need a PostgreSQL database running. One of the options is to start one using Docker; here a `bootzooka`
+First, you'll need a PostgreSQL database running. One of the options is to start one using Docker; here a `airline`
 database will be created:
 
 ```sh
-# use "bootzooka" as a password
-docker run --name bootzooka-postgres -p 5432:5432 -e POSTGRES_PASSWORD=bootzooka -e POSTGRES_DB=bootzooka -d postgres
+# use "airline" as a password
+docker run --name airline-postgres -p 5432:5432 -e POSTGRES_PASSWORD=airline -e POSTGRES_DB=airline -d postgres
 ```
 
 ## Backend
@@ -34,7 +34,7 @@ docker run --name bootzooka-postgres -p 5432:5432 -e POSTGRES_PASSWORD=bootzooka
 Then, you can start the backend. You'll need the JVM 21+ and [SBT](https://www.scala-sbt.org) installed:
 
 ```sh
-SQL_PASSWORD=bootzooka ./backend-start.sh
+SQL_PASSWORD=airline ./backend-start.sh
 ```
 
 By default, OpenTelemetry is disabled to avoid telemetry export exceptions (which is available and explorable if you are
@@ -69,7 +69,7 @@ source. The frontend connects to the backend on the 8080 port, as specified in t
 
 # Using the template
 
-If you'd like to use Bootzooka as a template for your own project it might be useful to:
+If you'd like to use Airline as a template for your own project it might be useful to:
 
 1. Clone the repository without history using `git clone --depth 1`
 2. Switch the git's origin to the new repository: `git remote set-url origin https://repo.com/OTHERREPOSITORY.git`
@@ -77,12 +77,12 @@ If you'd like to use Bootzooka as a template for your own project it might be us
 
 # Project info
 
-[The docs](http://softwaremill.github.io/bootzooka/) dive deeper into various aspects of the project (architecture, tech
+[The docs](http://softwaremill.github.io/airline/) dive deeper into various aspects of the project (architecture, tech
 stack, development tips).
 
 ## Commercial Support
 
-We offer commercial support for Bootzooka and related technologies, as well as development services. [Contact
+We offer commercial support for Airline and related technologies, as well as development services. [Contact
 us](https://softwaremill.com) to learn more about our offer!
 
 ## Copyright

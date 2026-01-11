@@ -87,7 +87,7 @@ val allBackendDependencies = baseDependencies ++ testingDependencies ++ loggingD
 
 // other constants
 
-val mainClassName = "com.softwaremill.bootzooka.Main"
+val mainClassName = "pl.algocode.airline.Main"
 val uiProjectName = "ui"
 
 // custom tasks & settings
@@ -101,7 +101,7 @@ val generateOpenAPIDescription = taskKey[Unit]("Generate the OpenAPI description
 def haltOnCmdResultError(result: Int): Unit = if (result != 0) { throw new Exception("Build failed.") }
 
 lazy val commonSettings = Seq(
-  organization := "com.softwaremill.bootzooka",
+  organization := "pl.algocode.airline",
   scalaVersion := "3.7.4",
   // version
   git.formattedShaVersion := {
@@ -136,7 +136,7 @@ ThisBuild / yarnTask := {
 
 lazy val rootProject: Project = (project in file("."))
   .settings(commonSettings)
-  .settings(name := "bootzooka")
+  .settings(name := "airline")
   .aggregate(backend, ui, docker)
 
 lazy val backend: Project = (project in file("backend"))
@@ -150,7 +150,7 @@ lazy val backend: Project = (project in file("backend"))
       val log = streams.value.log
       val targetPath = ((Compile / target).value / "openapi.yaml").toString
       Def.task {
-        (Compile / runMain).toTask(s" com.softwaremill.bootzooka.writeOpenAPIDescription $targetPath").value
+        (Compile / runMain).toTask(s" pl.algocode.airline.writeOpenAPIDescription $targetPath").value
       }
     }.value,
     // used by backend-start.sh, to restart the application when sources change; the OpenAPI spec needs to be
@@ -183,7 +183,7 @@ lazy val backend: Project = (project in file("backend"))
     ),
     buildInfoOptions += BuildInfoOption.ToJson,
     buildInfoOptions += BuildInfoOption.ToMap,
-    buildInfoPackage := "com.softwaremill.bootzooka.version",
+    buildInfoPackage := "pl.algocode.airline.version",
     buildInfoObject := "BuildInfo"
   )
 
@@ -210,7 +210,7 @@ lazy val docker: Project = (project in file("docker"))
     Compile / mainClass := Some(mainClassName),
     dockerExposedPorts := Seq(8080),
     dockerBaseImage := "eclipse-temurin:21",
-    Docker / packageName := "bootzooka",
+    Docker / packageName := "airline",
     dockerUsername := Some("softwaremill"),
     dockerUpdateLatest := true
   )

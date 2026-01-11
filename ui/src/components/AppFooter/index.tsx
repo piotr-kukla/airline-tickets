@@ -11,7 +11,7 @@ export const AppFooter: FC = () => {
     <div className="w-full h-full flex flex-col justify-center lg:items-center lg:justify-between lg:flex-row text-center lg:text-left gap-4">
       <div>
         <div className="flex flex-col text-sm">
-          <span className="text-xl text-blue-400 mb-2 lg:mb-0">Bootzooka</span>
+          <span className="text-xl text-blue-400 mb-2 lg:mb-0">Airline</span>
           <span className="text-sm">
             application scaffolding tool by{' '}
             <a href="http://softwaremill.com" className="underline">
@@ -23,7 +23,7 @@ export const AppFooter: FC = () => {
       <div>
         <div className="flex items-center w-full gap-4 justify-center lg:justify-between">
           <a
-            href="https://github.com/softwaremill/bootzooka"
+            href="https://github.com/softwaremill/airline"
             target="_blank"
             rel="noopener noreferrer"
           >
