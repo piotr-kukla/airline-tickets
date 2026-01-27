@@ -1,0 +1,40 @@
+---
+description: UI styling with Tailwind and shadcn components
+globs: ui/src/**/*.tsx
+alwaysApply: false
+---
+
+## Styling Approach
+
+- **Tailwind for styling** - Use Tailwind utility classes, not CSS files
+- **shadcn components** - Use components from `@/components/ui/` for consistent design
+- **No inline styles** - Never use `style` prop; use Tailwind classes
+- **Responsive design** - Use Tailwind responsive prefixes (`sm:`, `md:`, `lg:`)
+
+## shadcn Components
+
+- **Card components** - Use `<Card>`, `<CardHeader>`, `<CardContent>`, `<CardFooter>` for containers
+- **Form components** - Use `<Form>`, `<FormField>`, `<FormItem>`, `<FormLabel>`, `<FormControl>`, `<FormMessage>`
+- **Button variants** - Use Button with variants: `default`, `outline`, `ghost`, `link`, `destructive`
+- **Input components** - Use `<Input>` and `<Label>` from ui components
+- **Icons from lucide-react** - Use Lucide icons (e.g., `<UserIcon />`)
+
+## Layout Patterns
+
+- **Flexbox and Grid** - Use Tailwind flex/grid utilities for layouts
+- **Spacing** - Use consistent spacing scale: `gap-4`, `gap-6`, `p-4`, `m-4`
+- **Centering** - Use `flex items-center justify-center` for centering
+- **Max width containers** - Use `max-w-sm`, `max-w-md`, etc. for content width
+
+## Component Composition
+
+- **Spread props** - Spread field props from react-hook-form: `{...field}`
+- **asChild pattern** - Use `asChild` prop to compose components (e.g., `<Button asChild>`)
+- **Conditional classes** - Use `className` with template strings for conditional classes
+
+## Accessibility
+
+- **Semantic HTML** - Use proper HTML elements (`<button>`, `<input>`, `<label>`)
+- **Form labels** - Always associate labels with inputs
+- **Button types** - Specify `type="button"`, `type="submit"` explicitly
+- **Alt text** - Provide `alt` attributes for images

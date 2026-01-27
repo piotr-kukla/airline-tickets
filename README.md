@@ -1,90 +1,227 @@
-![Airline](https://github.com/softwaremill/airline/raw/master/banner.png)
+# Airline Tickets
 
-[![CI](https://github.com/softwaremill/airline/workflows/Airline%20CI/badge.svg)](https://github.com/softwaremill/airline/actions?query=workflow%3A%22Airline+CI%22)
+An application that automatically monitors Ryanair flight prices for user-defined alerts and sends email notifications when round-trip prices drop below set limits.
 
-Airline is a scaffolding project to allow quick start of development of a microservice or a web application. If you'd
-like to have a jump start developing a Scala-based project, skipping the boring parts and focusing on the real business
-value, this template might be for you!
+## Table of Contents
 
-You can start testing or developing Airline right away with the below setup, or proceed to the mor ecomplete
-[Airline documentation](http://softwaremill.github.io/airline/).
+- [Description](#description)
+- [Tech Stack](#tech-stack)
+- [Getting Started Locally](#getting-started-locally)
+- [Available Scripts](#available-scripts)
+- [Project Scope](#project-scope)
+- [Project Status](#project-status)
+- [License](#license)
 
-# Run locally using Docker
+## Description
 
-If you'd like to see the project in action, the fastest way is to use the provided Docker compose setup. It starts three
-images: Airline itself (either locally built or downloaded), PostgreSQL server and Graphana LGTM for observability.
+Airline Tickets is a flight price monitoring application designed to help users find affordable flights without having to manually check prices daily. The system automatically checks Ryanair flight prices once per day and notifies users via email when prices meet their criteria.
 
-# Run locally for development
+### Key Features
 
-If you'd like to modify some of Airline's parts, or develop your own application using the template, you'll need to
-start the backend & frontend in development modes separately.
+- **User Account Management**: Registration, email verification, login, and password reset functionality
+- **Alert Management**: Create, edit, and manage up to 5 active price alerts per user
+- **Automated Price Monitoring**: Daily automatic checks of Ryanair direct flight prices
+- **Email Notifications**: Receive emails with the top 3 cheapest options when prices drop below your limit
+- **Price History**: Complete audit trail of historical flight prices
+- **Flexible Date Selection**: Define date windows (up to 31 days) and stay duration ranges (up to 5 days spread)
 
-## Database
+### MVP Scope
 
-First, you'll need a PostgreSQL database running. One of the options is to start one using Docker; here a `airline`
-database will be created:
+- Monitors Ryanair direct flights only
+- Single origin airport (system-configured)
+- User selects destination by IATA code
+- Price limits in PLN
+- Daily job runs once per day in Europe/Warsaw timezone
+- Email notifications without deduplication (daily alerts while conditions are met)
 
-```sh
-# use "airline" as a password
+## Tech Stack
+
+### Backend
+
+- **Language**: Scala 3.7.4 on JVM 21
+- **HTTP API**: Tapir + Netty with OpenAPI/Swagger UI
+- **HTTP Client**: sttp client4 with OpenTelemetry integration
+- **JSON**: jsoniter-scala
+- **Database**: PostgreSQL 17.5 with JDBC + HikariCP connection pooling
+- **Database Client**: Magnum (type-safe DB client)
+- **Database Migrations**: Flyway
+- **Concurrency**: Ox (structured concurrency)
+- **Configuration**: pureconfig
+- **Logging**: SLF4J + Logback
+- **Observability**: OpenTelemetry (metrics, tracing, logs via OTLP)
+- **Security**: password4j for password hashing, API key authorization (Bearer tokens)
+- **Email**: SMTP or Mailgun integration
+- **Dependency Injection**: MacWire (compile-time DI)
+- **Testing**: ScalaTest with embedded PostgreSQL
+
+### Frontend
+
+- **Language**: TypeScript
+- **Framework**: React 19
+- **Routing**: react-router v7
+- **Data Fetching**: @tanstack/react-query
+- **API Client**: Auto-generated from OpenAPI using openapi-codegen
+- **Forms**: react-hook-form + zod validation
+- **UI Components**: Radix UI with shadcn-style components
+- **Styling**: Tailwind CSS
+- **Build Tool**: Vite with SWC plugin
+- **Testing**: Vitest + Testing Library with jsdom
+- **Code Quality**: ESLint + Prettier
+- **Node Version**: >= 22
+
+### Infrastructure
+
+- **Container Orchestration**: Docker Compose (backend + PostgreSQL + Grafana LGTM stack)
+- **Kubernetes**: Helm chart with Bitnami PostgreSQL dependency
+- **Observability Stack**: Grafana LGTM (Grafana + Loki + Tempo + Prometheus)
+
+## Getting Started Locally
+
+### Prerequisites
+
+- JVM 21 or higher
+- [SBT](https://www.scala-sbt.org) (Scala Build Tool)
+- [Yarn](https://yarnpkg.com) package manager
+- Node.js 22 or higher
+- Docker (for PostgreSQL)
+
+### Run with Docker Compose
+
+The fastest way to see the project in action is using Docker Compose, which starts the backend, PostgreSQL, and Grafana LGTM observability stack:
+
+```bash
+docker-compose up
+```
+
+### Run Locally for Development
+
+#### 1. Database
+
+Start a PostgreSQL database using Docker:
+
+```bash
+# Use "airline" as the password
 docker run --name airline-postgres -p 5432:5432 -e POSTGRES_PASSWORD=airline -e POSTGRES_DB=airline -d postgres
 ```
 
-## Backend
+#### 2. Backend
 
-Then, you can start the backend. You'll need the JVM 21+ and [SBT](https://www.scala-sbt.org) installed:
+Start the backend server (requires JVM 21+ and SBT):
 
-```sh
+```bash
 SQL_PASSWORD=airline ./backend-start.sh
 ```
 
-By default, OpenTelemetry is disabled to avoid telemetry export exceptions (which is available and explorable if you are
-using the Docker compose setup). If you have a collector running, edit the startp script appropriately.
+The backend will start on [`http://localhost:8080`](http://localhost:8080).
 
-The backend will start on [`http://localhost:8080`](http://localhost:8080). You can explore the API docs using the
-Swagger UI by navigating to [`http://localhost:8080/api/v1/docs`](http://localhost:8080/api/v1/docs).
+**API Documentation**: Explore the API using Swagger UI at [`http://localhost:8080/api/v1/docs`](http://localhost:8080/api/v1/docs).
 
-When any source files change on the backend, it will be automatically restarted. Moreover, if there are new or changed
-endpoint definitions, the OpenAPI description will be regenerated, which is then used by the frontend to generate
-service stubs.
+**Auto-reload**: The backend automatically restarts when source files change. When endpoint definitions are modified, the OpenAPI description is regenerated, which the frontend uses to generate service stubs.
 
-## Frontend
+**Note**: By default, OpenTelemetry is disabled in development mode to avoid telemetry export exceptions. Edit the startup script if you have a collector running.
 
-You will need the [yarn package manager](https://yarnpkg.com) to run the UI. Install it using your package manager or:
+#### 3. Frontend
 
-```sh
+First, install Yarn if you haven't already:
+
+```bash
 curl -o- -L https://yarnpkg.com/install.sh | bash
 ```
 
-Create a `ui/.env` file, using the `ui/.env.example`. Unless you changed the port of the backend, the default value will
-be fine.
+Create a `ui/.env` file using `ui/.env.example` as a template. The default backend URL (`http://localhost:8080`) should work unless you changed the backend port.
 
-Then, you can start the frontend:
+Start the frontend development server:
 
-```sh
+```bash
 ./frontend-start.sh
 ```
 
-And open `http://localhost:8081`. The frontend will automatically reload when there are any changes in the frontend
-source. The frontend connects to the backend on the 8080 port, as specified in the environment file.
+Open [`http://localhost:8081`](http://localhost:8081) in your browser.
 
-# Using the template
+**Auto-reload**: The frontend automatically reloads when source files change.
 
-If you'd like to use Airline as a template for your own project it might be useful to:
+## Available Scripts
 
-1. Clone the repository without history using `git clone --depth 1`
-2. Switch the git's origin to the new repository: `git remote set-url origin https://repo.com/OTHERREPOSITORY.git`
-3. Rename the project and the package using e.g. `sbt "renameProject com.mycompany avocado"`
+### Backend
 
-# Project info
+- `./backend-start.sh` - Start the backend development server with auto-reload
+- `./backend-start.bat` - Windows version of the backend start script
 
-[The docs](http://softwaremill.github.io/airline/) dive deeper into various aspects of the project (architecture, tech
-stack, development tips).
+### Frontend
 
-## Commercial Support
+- `./frontend-start.sh` - Start the frontend development server with hot reload
 
-We offer commercial support for Airline and related technologies, as well as development services. [Contact
-us](https://softwaremill.com) to learn more about our offer!
+### Docker
 
-## Copyright
+- `docker-compose up` - Start the complete application stack (backend, database, observability)
+- `docker-compose down` - Stop and remove all containers
 
-Copyright (C) 2013-2025 SoftwareMill [https://softwaremill.com](https://softwaremill.com).
+## Project Scope
+
+### In Scope (MVP)
+
+1. **Flight Monitoring**
+   - Ryanair direct flights only
+   - Single origin airport (system-configured, e.g., Wrocław - WRO)
+   - User-selected destination by IATA code
+   - Date window: up to 31 calendar days
+   - Stay duration: configurable min/max days with max 5-day spread
+
+2. **User Management**
+   - User registration with email and password
+   - Email verification (24-hour token validity)
+   - Login with email/password
+   - Password reset (1-hour token validity)
+   - Account deletion
+
+3. **Alert Management**
+   - Create, read, update, delete alerts
+   - Maximum 5 active alerts per user
+   - Price limit in PLN (per passenger, base fare only)
+   - Activate/deactivate alerts
+   - Alert status tracking
+
+4. **Price Monitoring**
+   - Daily job execution (once per day in Europe/Warsaw timezone)
+   - Round-trip (RT) price calculation: outbound + inbound minimum prices
+   - Top 3 cheapest options in email notifications
+   - Total count of qualifying options
+   - No deduplication between days (daily alerts when conditions are met)
+
+5. **Notifications**
+   - Email alerts when prices drop below limit
+   - One aggregated email per day per user (all qualifying alerts in one message)
+   - Error notification emails when checks fail
+   - No email sent when no qualifying options exist
+
+6. **Price Audit**
+   - Historical price data storage
+   - Independent of user accounts
+   - Preserved after account deletion
+
+### Out of Scope (Post-MVP)
+
+1. Flights with connections/layovers
+2. Multiple origin airports selectable by users
+3. Multi-airport cities (e.g., "London" with multiple airports)
+4. Day-of-week filters
+5. Price checks more than once per day
+6. Additional fees (baggage, seat selection, priority boarding)
+7. Multi-currency support
+8. Advanced performance optimizations beyond daily deduplication
+
+## Project Status
+
+This project is currently in active development, implementing the MVP features as defined in the Product Requirements Document (PRD). The application architecture follows a modern full-stack approach with Scala 3 backend and React frontend, built on the Airline scaffolding template.
+
+### Current Focus
+
+- Core alert management functionality
+- Ryanair API integration
+- Daily price monitoring job
+- Email notification system
+- User authentication and authorization
+
+## License
+
+This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.

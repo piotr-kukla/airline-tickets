@@ -1,0 +1,38 @@
+---
+description: Scala 3 coding style and syntax conventions
+globs: **/*.scala
+alwaysApply: false
+---
+
+## Scala 3 Syntax
+
+- **Use Scala 3 syntax exclusively** - No Scala 2 compatibility syntax
+  - Significant indentation instead of braces for blocks
+  - New control structure syntax (`if`/`for`/`while` without parentheses when followed by `then`/`do`/`yield`)
+  - Extension methods instead of implicit classes
+  - `given`/`using` instead of `implicit`
+  - Enums instead of sealed traits for ADTs when appropriate
+
+## Code Structure
+
+- **Package-private helpers** - Mark module-level helper functions/values as `private[packagename]` when used only within the package
+- **End markers** - Use `end ClassName` / `end methodName` for long class/method definitions to improve readability
+- **Export members** - Use `export` to re-export methods from dependencies (e.g., `export userRepo.{insert, findById}`)
+
+## Type Definitions
+
+- **Opaque types for domain IDs** - Use opaque type aliases or wrapper types for domain identifiers (e.g., `Id[User]`, `LowerCased`, `Hashed`)
+- **Explicit return types** - Always specify return types for public methods
+- **Type parameters** - Use meaningful type parameter names, not single letters (exception: standard `A`, `B` for generic utilities)
+
+## Pattern Matching
+
+- **Match expressions** - Prefer `match` expressions over nested `if`/`else`
+- **Pattern matching in val** - Use pattern matching in `val` declarations when deconstructing case classes
+- **Guard clauses** - Use guards in pattern matching for complex conditions
+
+## Comments
+
+- **Minimal comments** - Code should be self-explanatory; avoid obvious comments
+- **ScalaDoc for public APIs** - Document public API classes/methods with ScalaDoc format
+- **Inline comments only for complex logic** - Explain "why", not "what"

@@ -1,0 +1,48 @@
+---
+description: Testing patterns with ScalaTest and test infrastructure
+globs: backend/src/test/scala/**/*.scala
+alwaysApply: false
+---
+
+## Test Structure
+
+- **FlatSpec style** - Use `AnyFlatSpec` for behavior-driven test organization
+- **Extend BaseTest** - All tests extend `BaseTest` which provides common setup
+- **Test traits for shared setup** - Use `TestDependencies`, `TestEmbeddedPostgres` traits for common test infrastructure
+- **EitherValues for assertions** - Mix in `EitherValues` trait to use `.value` on `Either`
+
+## Test Organization
+
+- **"endpoint" should "behavior"** - Structure tests as `"endpoint" should "behavior" in { ... }`
+- **Given/When/Then comments** - Use comments to separate test phases:
+  ```scala
+  // given
+  val user = createTestUser()
+  
+  // when
+  val response = requests.registerUser(...)
+  
+  // then
+  response.code shouldBe StatusCode.Ok
+  ```
+
+## Test Infrastructure
+
+- **Requests helper object** - Use `requests` from `TestDependencies` for making HTTP calls
+- **RegisteredUser helper** - Use `requests.newRegisteredUsed()` to create test users
+- **TestClock for time travel** - Use `testClock.forward(duration)` to test time-dependent behavior
+- **Embedded PostgreSQL** - Tests use embedded PostgreSQL, not mocks
+- **DummyEmailSender for emails** - Use `DummyEmailSender.findSentEmail` to verify email sending
+
+## Assertions
+
+- **ScalaTest matchers** - Use `shouldBe`, `should matchPattern` for assertions
+- **Pattern matching for Either** - Use `should matchPattern { case Right(_) => }` for Either values
+- **Status code checks** - Always verify HTTP status codes explicitly
+- **Verify side effects** - Check database state, emails sent, etc.
+
+## Test Data
+
+- **Random test data** - Use `requests.randomLoginEmailPassword()` for unique test data
+- **No hard-coded test data** - Avoid magic strings and numbers; use generators
+- **Test isolation** - Each test should be independent; use transactions or cleanup

@@ -1,0 +1,47 @@
+---
+description: General coding principles and practices
+globs: **/*
+alwaysApply: true
+---
+
+## Code Quality
+
+- **Self-documenting code** - Write code that explains itself through clear naming
+- **Small functions** - Keep functions focused on a single task
+- **DRY principle** - Extract repeated code into reusable functions/components
+- **SOLID principles** - Follow Single Responsibility, Open/Closed, and Dependency Inversion
+
+## Naming Conventions
+
+- **Descriptive names** - Use clear, descriptive names that reveal intent
+- **Avoid abbreviations** - Write full words except for common abbreviations (e.g., `id`, `api`, `url`)
+- **Boolean naming** - Prefix booleans with `is`, `has`, `should` (e.g., `isValid`, `hasError`)
+- **Plural for collections** - Use plural names for arrays/lists (e.g., `users`, `endpoints`)
+
+## Error Prevention
+
+- **Fail fast** - Validate inputs early and return errors immediately
+- **Type safety** - Leverage type systems to prevent errors at compile time
+- **Null safety** - Use `Option`/`Optional` or null checks to handle missing values
+- **Explicit over implicit** - Make behavior explicit rather than relying on defaults
+
+## Security
+
+- **No secrets in code** - Never commit passwords, API keys, or tokens
+- **Hash passwords** - Always hash passwords before storage (using password4j in backend)
+- **Validate all inputs** - Validate and sanitize all user inputs
+- **Lowercase for uniqueness** - Store emails and logins in lowercase for case-insensitive comparison
+
+## Performance
+
+- **Lazy loading** - Load resources only when needed
+- **Database indexes** - Ensure frequently queried fields are indexed
+- **Connection pooling** - Use connection pools for database access (HikariCP)
+- **Caching** - Cache expensive computations and API calls when appropriate
+
+## Documentation
+
+- **README for setup** - Document setup and running instructions
+- **API documentation** - Generate OpenAPI/Swagger docs for HTTP APIs
+- **Inline docs for complexity** - Document complex algorithms and business rules
+- **Keep docs up to date** - Update documentation when code changes

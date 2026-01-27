@@ -1,0 +1,46 @@
+---
+description: Layered architecture patterns - Model, Service, API separation
+globs: **/*.scala
+alwaysApply: false
+---
+
+## Layer Organization
+
+- **Three-layer architecture** - Organize code into distinct layers:
+  - **Model layer** - Database models, repositories, data access (`*Model.scala`)
+  - **Service layer** - Business logic, validation, orchestration (`*Service.scala`)
+  - **API layer** - HTTP endpoints, request/response DTOs (`*Api.scala`)
+
+## Model Layer
+
+- **Repository pattern** - Use Magnum `Repo` for database operations
+- **Export common operations** - Use `export` to expose standard CRUD operations from `Repo`
+- **Type-safe queries** - Use Magnum's type-safe SQL DSL with `sql` string interpolation
+- **Annotate with Magnum annotations** - Use `@Table`, `@SqlName` for database mapping
+- **Domain model case classes** - Pure data structures with minimal business logic
+- **Password hashing in User object** - Keep crypto/hashing logic in companion objects
+
+## Service Layer
+
+- **Single Responsibility** - Each service handles one domain aggregate (User, PasswordReset, etc.)
+- **Constructor DI** - Inject all dependencies through constructor
+- **DbTx parameter** - Methods that access database require `(using DbTx)` parameter
+- **Either return types** - Service methods return `Either[Fail, T]` for operations that can fail
+- **Logging trait** - Extend `Logging` trait for `logger` access
+- **Private helper methods** - Extract complex logic into private methods within the service
+- **Private constants** - Define error messages as private constants at the top of the class
+
+## API Layer
+
+- **Separate endpoint descriptions from implementations** - Define endpoints in companion object, implementations in class
+- **Endpoint naming** - Use `*Endpoint` for descriptions, `*ServerEndpoint` for implementations
+- **Path constants** - Define path prefixes as private constants
+- **DTO case classes in companion object** - Define `*_IN` and `*_OUT` case classes in the companion object
+- **Derive codecs and schemas** - Use `derives ConfiguredJsonValueCodec, Schema` for DTOs
+- **Handle with SecurityLogic** - Use `handleSecurity` for authenticated endpoints
+- **Database transactions in handlers** - Wrap service calls with `db.transactEither`
+- **Map to DTOs** - Always map domain models to DTOs before returning from endpoints
+- **Tag endpoints** - Use `.tag("name")` for OpenAPI grouping
+- **Extend EndpointsForDocs** - Companion objects should extend `EndpointsForDocs` and define `endpointsForDocs`
+- **Extend ServerEndpoints** - API classes should extend `ServerEndpoints` and define `endpoints`
+- **Wire endpoints** - Use `wireList` from MacWire to collect all endpoint implementations

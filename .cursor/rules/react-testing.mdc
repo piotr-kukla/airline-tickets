@@ -1,0 +1,37 @@
+---
+description: Frontend testing with Vitest and Testing Library
+globs: ui/src/**/*.test.tsx, ui/src/**/*.test.ts
+alwaysApply: false
+---
+
+## Test Structure
+
+- **Vitest framework** - Use Vitest, not Jest
+- **Testing Library** - Use `@testing-library/react` for component testing
+- **Test file naming** - Name test files `ComponentName.test.tsx` next to the component
+
+## Test Organization
+
+- **describe blocks for grouping** - Group related tests with `describe`
+- **Clear test names** - Use descriptive `it` or `test` names that explain behavior
+- **AAA pattern** - Structure tests as Arrange, Act, Assert
+
+## Testing Utilities
+
+- **Custom render from tests/utils** - Use custom `render` from `@/tests/utils` that provides contexts
+- **Setup in tests/setup.ts** - Global test setup in `ui/src/tests/setup.ts`
+- **Mock API calls** - Mock generated API hooks for isolated component tests
+
+## Component Testing
+
+- **User interactions** - Use `userEvent` from Testing Library for interactions
+- **Query priorities** - Prefer `getByRole`, then `getByLabelText`, then `getByText`
+- **Avoid testid** - Use `data-testid` only as last resort; prefer semantic queries
+- **Async utilities** - Use `waitFor`, `findBy*` for async behavior
+- **Verify render output** - Assert that expected elements are in the document
+
+## Avoid
+
+- **No implementation details** - Don't test internal state or implementation
+- **No snapshot tests** - Prefer explicit assertions over snapshots
+- **No testing library extensions** - Use core Testing Library only

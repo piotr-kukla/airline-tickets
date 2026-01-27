@@ -1,0 +1,45 @@
+---
+description: React 19 patterns and component structure
+globs: ui/src/**/*.tsx, ui/src/**/*.ts
+alwaysApply: false
+---
+
+## Component Structure
+
+- **Functional components only** - Use function components, not class components
+- **FC type annotation** - Type components as `FC` (or `FC<Props>` if needed)
+- **Named exports for pages** - Export pages as named exports (e.g., `export const Login: FC`)
+- **Default exports for routes** - Use default exports only in route configuration
+- **Colocation** - Keep related components in the same directory with an `index.tsx`
+
+## Component Organization
+
+- **Pages in pages/** - Top-level routes go in `ui/src/pages/`
+- **Reusable components in components/** - Shared components in `ui/src/components/`
+- **UI primitives in components/ui/** - shadcn/Radix components in `ui/src/components/ui/`
+- **Component subfolders** - Group component file, tests, and sub-components in folders
+
+## Hooks
+
+- **Custom hooks in hooks/** - Shared hooks in `ui/src/hooks/`
+- **Use prefix for hooks** - All hooks must start with `use` (e.g., `useApiKeyState`, `useUserCheck`)
+- **Contexts in contexts/** - Context providers in `ui/src/contexts/`
+- **Extract complex logic to hooks** - Move complex state logic out of components into custom hooks
+
+## State Management
+
+- **React Query for server state** - Use `@tanstack/react-query` for API data
+  - Never store API data in useState
+  - Use generated hooks from `@/api/apiComponents`
+- **Local storage for persistence** - Use `@uidotdev/usehooks` `useLocalStorage` for client-side persistence
+- **Context for global state** - Use React Context for authentication, user state
+- **useState for local state** - Use `useState` for component-local UI state only
+
+## Forms
+
+- **React Hook Form** - Use `react-hook-form` for all forms
+- **Zod for validation** - Define schemas with Zod and use `zodResolver`
+- **shadcn Form components** - Use `<Form>`, `<FormField>`, `<FormControl>` from `@/components/ui/form`
+- **Form ID constants** - Define form IDs as constants (e.g., `const FORM_ID = 'login-form'`)
+- **Separate submit handler** - Use `form.handleSubmit()` with explicit handler function
+- **Mode: onBlur** - Use `mode: 'onBlur'` for form validation timing

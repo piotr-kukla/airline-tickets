@@ -1,0 +1,41 @@
+---
+description: Error handling patterns using Either and custom Fail types
+globs: **/*.scala
+alwaysApply: false
+---
+
+## Error Handling Strategy
+
+- **Use Either for business logic failures** - Return `Either[Fail, T]` for operations that can fail with business logic errors
+  - `Left(Fail.*)` for expected failures (validation, not found, unauthorized, etc.)
+  - Exceptions only for unexpected failures (database connection, programming errors)
+
+## Fail Hierarchy
+
+- **Use appropriate Fail types** - Match the failure to the correct type:
+  - `Fail.IncorrectInput(msg)` - Validation errors, malformed input
+  - `Fail.NotFound(what)` - Resource not found
+  - `Fail.Unauthorized(msg)` - Authentication failures
+  - `Fail.Forbidden` - Authorization failures (no message needed)
+  - `Fail.Conflict(msg)` - Resource conflicts
+
+## Either Composition
+
+- **Use Ox either blocks** - Use `ox.either` for composing multiple Either operations:
+  ```scala
+  either:
+    val user = findUser(id).ok()
+    val validated = validate(user).ok()
+    doSomething(validated)
+  ```
+
+- **Chain with for-comprehensions** - Use for-comprehensions for sequential Either operations when not using Ox
+- **Extract .ok() results** - Inside `either` blocks, use `.ok()` to unwrap `Either` values
+- **Early validation** - Validate inputs early and return errors before performing side effects
+
+## Error Messages
+
+- **User-friendly messages** - Error messages should be clear and actionable for end users
+- **Consistent message format** - Use consistent phrasing across similar errors
+- **No sensitive information** - Never include passwords, tokens, or internal details in error messages
+- **Generic auth errors** - Use "Incorrect login/email or password" to avoid revealing whether login exists

@@ -1,0 +1,48 @@
+---
+description: API integration patterns with generated OpenAPI client
+globs: ui/src/**/*.tsx, ui/src/**/*.ts
+alwaysApply: false
+---
+
+## Generated API Clients
+
+- **Use generated hooks** - ALWAYS use hooks from `@/api/apiComponents`, never write manual fetch calls
+- **Never modify generated files** - Files in `ui/src/api/` are generated from OpenAPI spec
+- **Regenerate after backend changes** - Run `yarn openapi` when backend API changes
+
+## React Query Patterns
+
+- **Mutations for write operations** - Use `usePost*`, `usePut*` hooks for mutations
+  ```typescript
+  const { mutate, mutateAsync, error } = usePostUserLogin({
+    onSuccess: (data) => { ... }
+  });
+  ```
+
+- **Queries for read operations** - Use `useGet*` hooks for queries
+  ```typescript
+  const { data, isSuccess, isError } = useGetUser(
+    { headers: { Authorization: `Bearer ${apiKey}` } },
+    { enabled: Boolean(apiKey), retry: false }
+  );
+  ```
+
+## Authentication
+
+- **Bearer token in headers** - Pass API key as `Authorization: Bearer ${apiKey}` header
+- **Store API key in local storage** - Use `useApiKeyState` hook for API key persistence
+- **Conditional queries** - Use `enabled` option to prevent queries without authentication
+- **No retry on auth failure** - Set `retry: false` for authenticated requests
+
+## Error Handling
+
+- **Extract error from mutation** - Mutations expose `error` property for error state
+- **ErrorMessage component** - Use `<ErrorMessage error={error} />` to display API errors
+- **Toast notifications** - Use `toast` from `sonner` for success/error feedback
+- **Handle errors in onSuccess/onError** - Process errors in mutation callbacks when needed
+
+## Side Effects
+
+- **useEffect for success handling** - Use `useEffect` to respond to successful queries
+- **Check isSuccess flag** - Always check `isSuccess` before using query data
+- **Dispatch context actions** - Update global state (e.g., user context) in `useEffect`

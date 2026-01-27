@@ -1,0 +1,44 @@
+---
+description: TypeScript coding style and conventions
+globs: ui/src/**/*.tsx, ui/src/**/*.ts
+alwaysApply: false
+---
+
+## Type Definitions
+
+- **Explicit return types for functions** - Always specify return types for exported functions
+- **Interface for props** - Use `interface` for component props, `type` for unions/intersections
+- **Const assertions** - Use `as const` for literal types and readonly arrays
+- **Avoid any** - Never use `any`; use `unknown` if type is truly unknown
+
+## Imports
+
+- **@ alias for src** - Use `@/` alias for imports from `src/` directory
+- **Named imports** - Prefer named imports over default imports (except pages)
+- **Group imports** - Group imports: external packages, then internal modules, then styles
+- **Sort imports** - Keep imports alphabetically sorted within groups
+
+## Constants
+
+- **UPPER_CASE for constants** - Use UPPER_CASE for true constants (e.g., `STORAGE_API_KEY`, `FORM_ID`)
+- **const for single-assignment** - Use `const` for all variables that don't reassign
+- **Define at module level** - Extract magic strings/numbers to named constants
+
+## Functions
+
+- **Arrow functions for callbacks** - Use arrow functions for inline callbacks
+- **Function declarations for named functions** - Use `function` keyword for top-level named functions
+- **Destructure parameters** - Destructure object parameters when using multiple properties
+- **Optional parameters last** - Place optional parameters after required ones
+
+## Async/Await
+
+- **async/await over promises** - Use `async`/`await` instead of `.then()` chains
+- **Handle errors** - Always handle potential errors in async functions
+- **mutateAsync for sequential ops** - Use `mutateAsync` when you need to await mutation results
+
+## Comments
+
+- **Minimal comments** - Code should be self-explanatory
+- **JSDoc for public APIs** - Document exported functions/types with JSDoc
+- **TODO comments** - Use `// TODO:` format with description

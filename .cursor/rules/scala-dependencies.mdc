@@ -1,0 +1,40 @@
+---
+description: Dependency injection and configuration patterns using MacWire
+globs: **/*.scala
+alwaysApply: false
+---
+
+## Dependency Injection
+
+- **MacWire for DI** - Use compile-time dependency injection with MacWire
+  - Never use runtime DI frameworks (Spring, Guice)
+  - Never use manual factory patterns
+
+- **Autowiring in Dependencies object** - Use `autowire[T]` to construct the dependency graph
+  - Provide explicit instances for infrastructure (DB, Clock, Config, OpenTelemetry)
+  - Let MacWire resolve application services automatically
+
+- **WireList for collections** - Use `wireList` to automatically collect implementations:
+  ```scala
+  override val endpoints = wireList
+  override val endpointsForDocs = wireList[AnyEndpoint]
+  ```
+
+## Constructor Injection
+
+- **All dependencies via constructor** - Never use lazy initialization or service locators
+- **Interface types in constructors** - Depend on traits/abstract types, not concrete implementations when possible
+- **Order dependencies logically** - Group related dependencies (models, services, config, utils)
+
+## Configuration
+
+- **PureConfig for config loading** - Use PureConfig to load `application.conf`
+- **Case classes for config** - Define configuration as nested case classes (e.g., `UserConfig`, `DBConfig`)
+- **Sensitive wrapper type** - Use `Sensitive[T]` for passwords, tokens, API keys in configuration
+- **Config.read pattern** - Load config once at application startup in `Dependencies.create`
+
+## Ox Scopes
+
+- **Ox for resource management** - Use Ox for managing resources with lifecycles
+- **useInScope for closeable resources** - Use `useInScope(resource)(_.close())` for resources that need cleanup
+- **useCloseableInScope for AutoCloseable** - Use `useCloseableInScope` for `AutoCloseable` resources like DB connections
